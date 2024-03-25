@@ -1,0 +1,4 @@
+binsearch.c:27:1: error: expected identifier or '('
+continue;
+^
+1 error generated.
