@@ -2,12 +2,12 @@
 
 int nondet_int();
 
-unsigned int binsearch(int* a, int key, unsigned int size, int* found) {
-  unsigned int low = 0;
-  unsigned int high = size - 1;
+int binsearch(int* a, int key, int size) {
+  int low = 0;
+  int high = size - 1;
   
   while (low <= high) {
-    unsigned int mid = (low + high) / 2;
+    int mid = (low + high) / 2;
     int midVal = a[mid];
 
     if (midVal < key)
@@ -15,15 +15,13 @@ unsigned int binsearch(int* a, int key, unsigned int size, int* found) {
     else if (midVal > key)
       high = mid - 1;
     else {
-      (*found) = 1;
       return mid; // key found
     }
   }
-  (*found) = 0;
-  return 0;  // key not found.
+  return -1;  // key not found.
 }
 
-#define SIZE 2
+#define SIZE 10
 
 int main () {
   int a[SIZE];
@@ -43,11 +41,10 @@ int main () {
     }
   }
 
-  int found = 0;
-  unsigned int r = binsearch(a, k, SIZE, &found);
-  if (found) {
+  int r = binsearch(a, k, SIZE);
+  if (r != -1) {
     assert(a[r] == k);
   } else {
-    
+    assert(!present);
   }
 }
