@@ -123,7 +123,7 @@
 \ccsdesc[500]{Software and its engineering~Dynamic analysis}
 \ccsdesc[500]{Software and its engineering~Software testing and debugging}
 
-\keywords{software testing software verificaton, proof, counterexample, }
+\keywords{software testing software verificaton, proof, counterexample, tests}
 
 
 \maketitle
@@ -146,12 +146,60 @@ The dialogue takes place in a classroom.  The last class of the day has finished
 
 \vspace{0.1in}
 
-\noindent{\bf PUPIL DELTA:} \emph{(sotto voce)} That's because Dr. Omega is a bit of an absentminded flake.
+\noindent{\bf PUPIL DELTA:} \emph{(sotto voce)} That's because
+Dr. Omega is a bit of an absentminded flake.
+
+\vspace{0.1in}
+
+\noindent{\bf PUPIL SIGMA:}  Okay, that's true.  But Alpha noticed it
+was wrong and once she explained why, we all understood.  But I want
+to say something stronger than just that we all know the code is
+correct now.  Look at the code
+
+\vspace{0.1in}
+
+\noindent \emph{(let's look at the code ourselves (FIgure \ref{fig:first})}
+
+\begin{figure*}
+  \begin{code}
+unsigned int binsearch(int* a, int key, unsigned int size, int* found) \{
+  unsigned int low = 0;
+  unsigned int high = size - 1;
+  
+  while (low <= high) \{
+    unsigned int mid = (low + high) / 2;
+    int midVal = a[mid];
+
+    if (midVal < key)
+      low = mid + 1;
+    else if (midVal > key)
+      high = mid - 1;
+    else \{
+      (*found) = 1;
+      return mid; // key found
+    \}
+  \}
+  (*found) = 0;
+  return 0;  // key not found.
+\}
+\end{code}
+\caption{C Code on the Whiteboard at the End of Class}
+\label{fig:first}
+\end{figure*}
 
 
 \section{Postscript}
 
-This dialogue is a tribute to and reflection on Imre Lakatos' classic work, \emph{Proof and Refutation}~\cite{lakatos1963proofs}.  It also owes a debt to MacKenzie's more recent classic, \emph{Mechanizing Proof: Computing, Risk, and Trust}~\cite{mackenzie2004mechanizing}
+This dialogue is a tribute to and reflection on Imre Lakatos' classic
+work, \emph{Proof and Refutation}~\cite{lakatos1963proofs}.  It also
+owes a debt to MacKenzie's more recent classic, \emph{Mechanizing
+  Proof: Computing, Risk, and Trust}~\cite{mackenzie2004mechanizing}.
+
+The version of binary search that starts things rolling (and the bug
+that startles the class) come from Joshua Bloch's blog post~\cite{bloch} reporting
+the bug, and, thus, from Jon Bentley's original version ``proven
+correct'' in \emph{Programming Pearls}~\cite{Pearls}.  The code has
+been changed to C code, to fit the future discussion better.
 
 \bibliographystyle{plain}
 \bibliography{bibliography}
