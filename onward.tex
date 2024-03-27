@@ -154,11 +154,11 @@ Dr. Omega is a bit of an absentminded flake.
 \noindent{\bf PUPIL SIGMA:}  Okay, that's true.  But Alpha noticed it
 was wrong and once she explained why, we all understood.  But I want
 to say something stronger than just that we all know the code is
-correct now.  Look at the code
+correct now.  Look at the code...
 
 \vspace{0.1in}
 
-\noindent \emph{(let's look at the code ourselves (FIgure \ref{fig:first})}
+\emph{(let's look at that code ourselves (Figure \ref{fig:first})}
 
 \begin{figure*}
   \begin{code}
@@ -166,7 +166,7 @@ int binsearch(int* a, int key, int size) \{
   int low = 0;
   int high = size - 1;
   
-  while (low <= high) \{ {\bf ON THIS LINE THE ``='' HAS BEEN CLEARLY ADDED LATER}
+  while (low <= high) \{ {\bf ON THIS LINE THE ``='' HAS CLEARLY BEEN ADDED LATER}
     int mid = (low + high) / 2;
     int midVal = a[mid];
 
@@ -194,7 +194,7 @@ owes a debt to MacKenzie's more recent classic, \emph{Mechanizing
   Proof: Computing, Risk, and Trust}~\cite{mackenzie2004mechanizing}.
 To some extent the approach to thinking about proofs, tests, and their
 meaning is based on a Popperian falsification methodology proposed in
-work by my colleagues and myself~\cite{ASE15,ASEJ}.
+work by my colleagues and myself~\cite{groce2015verified,groce2018verified}.
 
 The version of binary search that starts things rolling (and the bug
 that startles the class) come from Joshua Bloch's blog post~\cite{bloch} reporting
