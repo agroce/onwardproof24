@@ -185,7 +185,24 @@ int binsearch(int* a, int key, int size) \{
 \label{fig:first}
 \end{figure*}
 
-...
+
+\noindent{\bf PUPIL SIGMA:}  Now that we fixed that one problem, and
+we all understand the basic idea of binary search, there's no use for
+anything more formal or complicated.  There's so little room for bugs
+here that any possible problems would be revealed as soon as we used
+the code.  Think about the professor's mistake.  As soon as we started
+using the code, it'd fail to find something present in the array.
+
+\noindent{\bf PUPIL DELTA:} Are you sure?  I wonder how often it
+fails.  I'll grant that if the code goes wrong often enough, someone
+would notice, but you seem to be suggesting that even without tests,
+we'd notice very quickly.  But what if we almost always search for
+things not in the array?  Or even if we search for things present most
+of the time, isn't it only going to show up when the item is where low
+and high meet, and might that not be really rare?  Especially if the
+array is very big!  I'd want thorough tests, and even for this code
+I'm not sure how to make them!
+
 
 \noindent{\bf PUPIL DELTA:}  It seems to me this is another reason
 tests are better, or at least useful even when we have a proof.
