@@ -158,7 +158,9 @@ correct now.  Look at the code...
 
 \vspace{0.1in}
 
-\emph{(let's look at that code ourselves (Figure \ref{fig:first})}
+\emph{(let's look at that code ourselves (Figure \ref{fig:first}))}
+
+\vspace{0.1in}
 
 \begin{figure*}
   \begin{code}
@@ -203,8 +205,145 @@ and high meet, and might that not be really rare?  Especially if the
 array is very big!  I'd want thorough tests, and even for this code
 I'm not sure how to make them!
 
-\noindent{\bf PUPILGAMMA:} If you varied the size of the array, in
-your tests, that should help.  At size 1, this bug shows up every time the element is present!
+\noindent{\bf PUPIL GAMMA:} If you varied the size of the array, in
+your tests, that should help.  At size 1, this bug shows up every time
+the element is present!
+
+\noindent{\bf PUPIL ALPHA:}  Oh that's nice.  I bet that's a good
+idea, to test systems that can vary their size on really small
+versions.  You can probably test really thoroughly at small sizes,
+too.  If an array only has one element, I think you've fully tested it
+if you just check the case where the element is the one you're
+searching for and the element is not the one you're searching for!
+
+\noindent{\bf PUPIL DELTA:}  Anyway, I think the real problem isn't
+how to test binary search.  I mean, that's fine, and I'm sure there
+could even be computer scientists who just think about silly trivial
+thngs like how to write better tests that find more bugs.  But don't
+you think there's something deeper going on here, something that's a
+\emph{real} problem?
+
+\noindent{\bf PUPIL GAMMA:}  You're just jealous I thought of the
+one-element array thing.
+
+\noindent{\bf PUPIL BETA:} No, that's not it.  All philosophy-CS
+double majors are like this, all the time.  It's annoying. Anyway, let's hear about that ``real'' problem.
+
+\noindent{\bf PUPIL DELTA:}  The real problem is, imagine that we have
+a set of perfect, absolutely thorough tests for binary search, or
+whatever we're testing, let's call it program $\mathcal{P}$.  Or,
+better yet, we have a complete proof of correctness of $\mathcal{P}$.
+Now, those tests or that proof are going to be \emph{with respect to a
+  specification of what $\mathcal{P}$ should do.}  Let's call that
+specification $\mathcal{S}$.  Ok, we've demonstrated to everyone's
+satisfaction that $\mathcal{P}$ satisfies $\mathcal{S}$.   I claim
+we're not much better off than in the case where we just trust Sigma's
+intuition that $\mathcal{P}$ is ``obviously right.''
+
+\noindent{\bf PUPIL BETA:} How so?
+
+\noindent{\bf PUPIL DELTA:} Because, we've just shoved back the
+problem.  We were going to trust $\mathcal{P}$, or maybe trust Sigma.
+Now we're just changing that to trusting $\mathcal{S}$!  That seems as
+bad as trusting Sigma!
+
+\noindent{\bf PUPIL SIGMA:} Hey!  What's so bad about trusting me!
+
+\noindent{\bf PUPIL DELTA:} Sorry.  But seriously, we've just changed
+the thing we have to place arbitrary trust in.  Even if our proofs or
+tests are good, how do we know $\mathcal{S}$ is good?
+
+\noindent{\bf PUPIL ALPHA:} $\mathcal{S}$  might be a lot simpler than
+$\mathcal{P}$.
+
+\noindent{\bf PUPIL DELTA:} Ok, I can imagine that might
+probabilistically give us some more \emph{confidence}.  I don't want
+to turn this into the general problem of epistemology, but I think
+there is a practical problem here.  In the case of binary search, I
+think there is a small amount of simplification from 
+$\mathcal{P}$ to $\mathcal{S}$.  And a small gain.  But both are
+fairly trivial.  It really is probably almost as good to just trust
+Sigma as to trust $\mathcal{S}$.  Sigma made a perfect score on the
+midterm, after all!
+
+\vspace{0.1in}
+
+\emph{(Delta walks to the whiteboard and points to the code.)}
+
+\vspace{0.1in}
+
+\noindent{\bf PUPIL DELTA:}  And maybe trusting Sigma or $\mathcal{S}$
+is fine in this case.  But if $\mathcal{P}$ is something complicated,
+just the specification $\mathcal{S}$ is going to be extraordinarily
+complex, much more complex than the $\mathcal{P}$ for something like
+binary search.  If we don't trust $\mathcal{P}$ for binary search, why
+on earth would we ever trust something as complicated as $\mathcal{S}$
+for a real problem?  What's an operating system's $\mathcal{S}$?
+
+{\bf --------------------------------------}
+
+\noindent{\bf PUPIL BETA:} I don't think this problem of knowing if
+you've proved or tested the right specification is quite as hard as
+you all seem to think. I grant that \emph{sometimes} it is, but I
+think often we have a program like this one, where it's easy.  Not
+because, as Sigma originally suggested, binary search is so trivial,
+but because binary search is \emph{equivalent to something that really
+  is trivial.}
+
+\noindent{\bf PUPIL GAMMA:} What do you mean?
+
+\noindent{\bf PUPIL BETA:} I mean that the right specification for
+binary search is very simple:  binary search works just like linear
+search, only faster.  Ok, maybe the ``faster'' part is not so easy,
+but in either a proof or a test, we just need to compare the
+``tricky'' binary search results to the result for linear search.
+Linear search is so simple I defy anyone, even the worst student in
+this class, to get it seriously wrong!
+
+\noindent{\bf PUPIL EPSILON:}  That's a really good idea!
+
+\noindent{\bf PUPIL GAMMA:}  Except it doesn't work.   What if you are
+using binary search on an array with duplicates?  The result won't
+always be the same as for linear search  then.
+
+\noindent{\bf PUPIL BETA:} Oh, fine, we can just check that if both
+return that the value is found,  the right value is present in both
+positions.
+
+\noindent{\bf PUPIL GAMMA:} But then you are only using the linear
+search to check ``not found'' results, and I imagine you could just
+set up tests to know whether they are using a value in the array or
+not.  And for proofs, I think proving equivalence to linear search for
+``not found'' might be harder than just proving the right answer is
+provided, since it's \emph{not} actually equivalent to linear search!
+
+\noindent{\bf PUPIL EPSILON:}  Ok, maybe Beta hasn't saved us much
+work here, where it's not quite equivalent and ``fixing'' the mismatch
+doesn't seem much easier than just figuring out exactly what binary
+search should do.  But I bet this is a good idea for the kinds of
+programs we were mentioning above, where a person understanding fully
+what a program ought to do seems so hard it's almost impossible.
+Think about either a really abstract file system that doesn't have
+hardware problems or efficiency issues, or a compiler that doesn't do
+any optimizations, and maybe produces very slow, but simple, binary
+code.  I don't know about proofs, but for testing at least, comparing
+complex versions that have to be fast and practical for real-world use
+to much simpler implementations that you couldn't use in real life...
+That seems like a very nice way to test some things.
+
+\noindent{\bf PUPIL DELTA:}  Yes, yes, that sounds practical.  But it
+doesn't really address the underlying problem at all.  It's a cheap
+hack that's sometimes available.  But how do we know the ``simple''
+file system or compiler's ``idea of what it should do'' is right?  How
+do we trust any specification that's too complicated to fit inside a
+person's head.  Or, really, like we said, to fit inside multiple heads
+at once so a group of reliable people can all agree that they are all
+thinking of the same thing, and that thing is the right thing.  You're
+just pushing the problem back one step, in a small set of cases, and
+the same issue really comes up for the simple verison, if the problem
+at hand is at all complicated, like your examples.
+
+{\bf --------------------------------------}
 
 \noindent{\bf PUPIL DELTA:}  It seems to me this is another reason
 tests are better, or at least useful even when we have a proof.
@@ -221,15 +360,15 @@ work, \emph{Proof and Refutation}~\cite{lakatos1963proofs}.  It also
 owes a debt to MacKenzie's more recent classic, \emph{Mechanizing
   Proof: Computing, Risk, and Trust}~\cite{mackenzie2004mechanizing}.
 To some extent the approach to thinking about proofs, tests, and their
-meaning is based on a Popperian falsification methodology proposed in
+meaning that Delta finally compromises on is based on a Popperian falsification methodology proposed in
 work by my colleagues and myself~\cite{groce2015verified,groce2018verified}.
 
 The version of binary search that starts things rolling (and the bug
-that startles the class) come from Joshua Bloch's blog post~\cite{bloch} reporting
-the bug, and, thus, from Jon Bentley's original version ``proven
+that unsettles the class at the end) comes from Joshua Bloch's blog post~\cite{bloch} reporting
+the bug, and, thus, fundamentally, from Jon Bentley's original version ``proven
 correct'' in \emph{Programming Pearls}~\cite{Pearls}.  The code has
-been changed to C code, to fit the overall discussion (and use of
-tools) better.
+been changed to C code.  The programs in question, and instructions
+for testing and proving them using CBMC~\cite{CBMCp} and DeepState~\cite{goodman2018deepstate}, can be found at \url{https://github.com/agroce/onward24code}.
 
 \bibliographystyle{plain}
 \bibliography{bibliography}
