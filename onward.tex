@@ -130,7 +130,9 @@
 
 \section{The Dialogue}
 
-The dialogue takes place in a classroom.  The last class of the day has finished, and the professor is packing up his laptop and turning off the projection screen, as a few students remain sitting near each other.  The lingering students have become interested in a {\bf PROBLEM} (or perhaps simply caught up in an argument).
+The dialogue takes place in a classroom.  The last class of the day
+has finished, and the professor is packing up laptop, 
+display-adapter, and mouse, and even remembering to turn off the projection screen, as a few students remain sitting near each other.  The lingering students have become interested in a {\bf PROBLEM} (or perhaps simply caught up in an argument).
 
 \vspace{0.1in}
 
@@ -345,22 +347,46 @@ at hand is at all complicated, like your examples.
 
 {\bf --------------------------------------}
 
-\noindent{\bf PUPIL DELTA:}  It seems to me this is another reason
-tests are better, or at least useful even when we have a proof.
-Imagine we change the code for some reason.  If we have tests, it's
+\noindent{\bf PUPIL GAMMA:}  One thing that worries me is that we're
+talking as if the program  $\mathcal{P}$ is just finished, once and
+for all, and then we test it or prove it and when we're satisfied we
+call it a day.  Maybe that's true for a very small program like binary
+search in a library, or as a homework assignment (if you are crazy and
+prove your homework assignments, or even bother testing them).  But in
+the real world, isn't code modified and changed all the time?  I feel
+like a program in reality is either thrown away quickly (in which case
+who cares if it's right?) or lives to be changed, maybe even
+eventually having no lines of code in common with the original program.
+
+\noindent{\bf PUPIL DELTA:}  Like the ship of Theseus!
+
+\noindent{\bf PUPIL BETA:} Show-off... 
+
+\noindent{\bf PUPIL DELTA:}  Seriously, it seems to me this is a possible reason
+tests are even better than proofs!  Or at least useful even when we have a proof.
+Imagine we change the code for some reason.  If we have really good tests, it's
 easy to see if we made a mistake: we just run those tests!  But your
 proof isn't something you can run.   You have to look at the proof and
 the changed code, and think about whether the change breaks the
 proof.  Another chance for human mistakes!
 
+\noindent{\bf PUPIL EPSILON:} There are automated proofs, where a
+computer produces the proof, or at least checks that it's correct.
+
+\noindent{\bf PUPIL DELTA:} Sure, but I think the tools for generating
+proofs without human assistance are not that great right now.  That
+might change, but right now it's true.  And the checkers don't seem
+that helpful here:  I bet when you change your program, the
+proof-checker just always says ``your proof no longer works.''
+
 \section{Postscript}
 
-This dialogue is a tribute to and reflection on Imre Lakatos' classic
+This (polyphonic) dialogue is a tribute to, and reflection on, Imre Lakatos' classic
 work, \emph{Proof and Refutation}~\cite{lakatos1963proofs}.  It also
 owes a debt to MacKenzie's more recent classic, \emph{Mechanizing
   Proof: Computing, Risk, and Trust}~\cite{mackenzie2004mechanizing}.
 To some extent the approach to thinking about proofs, tests, and their
-meaning that Delta finally compromises on is based on a Popperian falsification methodology proposed in
+meaning that (some of) the students arrive at is based on a Popperian~\cite{Popper} falsification methodology proposed in
 work by my colleagues and myself~\cite{groce2015verified,groce2018verified}.
 
 The version of binary search that starts things rolling (and the bug
@@ -368,7 +394,50 @@ that unsettles the class at the end) comes from Joshua Bloch's blog post~\cite{b
 the bug, and, thus, fundamentally, from Jon Bentley's original version ``proven
 correct'' in \emph{Programming Pearls}~\cite{Pearls}.  The code has
 been changed to C code.  The programs in question, and instructions
-for testing and proving them using CBMC~\cite{CBMCp} and DeepState~\cite{goodman2018deepstate}, can be found at \url{https://github.com/agroce/onward24code}.
+for proving and testing (and mutating) them using CBMC~\cite{CBMCp} and
+DeepState~\cite{goodman2018deepstate} (and UniversalMutator~\cite{SyntaxUM}), respectively,, can be found at
+\url{https://github.com/agroce/onward24code}.  Some brief notes on the
+connection between this code and the above follows.
+
+\subsection{CBMC}
+
+CBMC serves as an exemplar for \emph{proof}.  CBMC
+translates C programs into goto-programs, and, eventually, into SAT or
+SMT constraints, such that a satisfying assignment represents a
+counterexample to the properties to be checked.  A proof of
+unsatisfiability then is a proof of correctness for the program.
+
+Strictly speaking, the
+proof can be partial: CBMC is a \emph{bounded} model checker, and so
+requires the use of a bound on loop unrollings.  However, in the case
+of binary search, a limit on unrollings of the search loop is part of
+the full specification of correctness, so the proof is complete (since
+CBMC can check that an execution exceeding provided loop bounds does
+not exist).
+
+
+\subsection{DeepState}
+
+DeepState exemplifies \emph{tests}.  While DeepState can make use of
+symbolic execution, which can more resemble proof, if is primarily
+used in conjunction with the more scalable approaches of random
+testing and coverage-guided fuzzing.  The key idea is that while a
+CBMC output of ``correct'' indicates that the program input satisfies
+its specification (though not, as our students discuss, that the
+specification itself is correct), DeepState may run for days without
+finding a bug in an incorrect program.  On the other hand, for some
+programs, DeepState will quickly find a bug, and CBMC will simply
+exhaust the memory of the computer it is running on, and the patience
+of the user, without accomplishing much of anything.  How often this
+happens, vs. producing the bug quickly, however, is hard to know.
+
+\subsection{UniversalMutator}
+
+Finally, the idea of mutation is represented by UniversalMutator, which mutates code
+in C and a number of other languages.  UniversalMutator, like other
+mutation tools, acts as a limited version of Epsilon's hypothetical
+``bugginator.''
+
 
 \bibliographystyle{plain}
 \bibliography{bibliography}
