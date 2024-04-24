@@ -127,7 +127,18 @@
 \keywords{software testing software verificaton, proof, counterexample, tests}
 
 
+
+\begin{abstract}
+This essay consists of an imaginary discussion among a group of
+  students after a computer science class, that presents some problems of
+  (and partial solutions to) fundamental issues of program
+  correctness.
+  \end{abstract}
+
+
+
 \maketitle
+
 
 \section{The Dialogue}
 
@@ -564,7 +575,7 @@ assume an {\tt int} is an actual integer, not a computer int.  This is a problem
 of the imagination.  How do we get an imaginator?
 
 
-\begin{figure*}
+\begin{figure}
   {\scriptsize
   \begin{code}
 \#define MAX\_SIZE 10
@@ -597,10 +608,10 @@ int main () \{
 }
 \caption{CBMC Proof Harness for Binary Search}
 \label{fig:cbmc}
-\end{figure*}
+\end{figure}
 
 
-\begin{figure*}
+\begin{figure}
 {\scriptsize
   \begin{code}
 \#include <algorithm>
@@ -639,7 +650,7 @@ TEST(Run, Bentley) \{
 }
 \caption{DeepState Test Harness for Binary Search}
 \label{fig:deepstate}
-\end{figure*}
+\end{figure}
 
 \FloatBarrier
 
