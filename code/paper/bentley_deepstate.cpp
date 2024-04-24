@@ -7,10 +7,12 @@ int binsearch(int* a, int key, int size) {
   
   int low = 0;
   int high = size - 1;
-
-  while (low < high) {
+  
+  while (low <= high) {
+    LOG(TRACE) << "low = " << low << " high = " << high;
     int mid = (low + high) / 2;
     int midVal = a[mid];
+    LOG(TRACE) << "mid = " << mid << " midVal = " << midVal;
 
     if (midVal < key)
       low = mid + 1;
@@ -24,14 +26,16 @@ int binsearch(int* a, int key, int size) {
   return -1;  // key not found.
 }
 
-#define SIZE 1
+#define MAX_SIZE 32
 
 TEST(Run, Bentley) {
-  int a[SIZE];
+  int a[MAX_SIZE];
+  unsigned int SIZE = DeepState_UIntInRange(1, MAX_SIZE);
   int k = DeepState_Int();
-  //__CPROVER_assume(k > -SIZE);
-  //__CPROVER_assume(k < SIZE);   
   int present = 0;
+
+  LOG(TRACE) << "SIZE = " << SIZE;
+
   for (int i = 0; i < SIZE; i++) {
     a[i] = DeepState_Int();
     LOG(TRACE) << "a[" << i << "] = " << a[i];
@@ -39,14 +43,21 @@ TEST(Run, Bentley) {
       present = 1;
     }
   }
-  std::sort(std::begin(a), std::end(a));
-  if (DeepState_Bool()) {
-    present = 1;
-    k = a[DeepState_IntInRange(0,SIZE-1)];
+  LOG(TRACE) << "Sorting...";  
+  std::sort(std::begin(a), &a[SIZE]);
+  for (int i = 0; i < SIZE; i++) {
+    LOG(TRACE) << "a[" << i << "] = " << a[i];
   }
-    
+  if (!present && DeepState_Bool()) {
+    k = a[DeepState_UIntInRange(0, SIZE-1)];
+    present = 1;
+  }
+
+  LOG(TRACE) << "k = " << k;
+  LOG(TRACE) << "present = " << present;
 
   int r = binsearch(a, k, SIZE);
+  LOG(TRACE) << "r = " << r;
   if (r != -1) {
     assert(a[r] == k);
   } else {

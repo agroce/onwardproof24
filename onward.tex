@@ -26,6 +26,7 @@
 
 \usepackage{code}
 \usepackage{graphicx}
+\usepackage{placeins}
 
 %%
 %% \BibTeX command to typeset BibTeX logo in the docs
@@ -165,6 +166,7 @@ correct now.  Look at the code...
 \vspace{0.1in}
 
 \begin{figure*}
+  {\scriptsize
   \begin{code}
 int binsearch(int* a, int key, int size) \{
   int low = 0;
@@ -185,6 +187,7 @@ int binsearch(int* a, int key, int size) \{
   return -1;  // key not found.
 \}
 \end{code}
+}
 \caption{C Code on the Whiteboard at the End of Class}
 \label{fig:first}
 \end{figure*}
@@ -282,9 +285,75 @@ binary search.  If we don't trust $\mathcal{P}$ for binary search, why
 on earth would we ever trust something as complicated as $\mathcal{S}$
 for a real problem?  What's an operating system's $\mathcal{S}$?
 
-{\bf --------------------------------------}
+\noindent{\bf PUPIL GAMMA:}  In the real world, I think this ends up
+being a social process, really.  I mean, you're right that it's about
+trust, but not trusting just Sigma.  How do people come up with the
+specification for an operating system, and decide if it's any good?  A
+group of experts, I'd guess, work on it.  They toss ideas back and
+forth, they look for counterexamples to proposals about how the system
+should work.  They talk to test engineers, developers, users.
 
-\noindent{\bf PUPIL BETA:} I don't think this problem of knowing if
+\noindent{\bf PUPIL DELTA:} You know, that sounds like what really
+happens.  Trusting Sigma alone is no good, but a bunch of Sigmas...  I
+don't konw if that's ideal, but it's not nearly as bad.  And in
+practice, it's what we have to rely on.  Even mathematical ``proofs''
+are just things enough mathematicians agree to call proofs.  It
+happens that in math, unlike in philosophy, there's pretty frequent
+agreement on whether a proof \emph{is} a proof, but I've read enough
+history of the field to know there are also cases where it took a lot
+of argument and discussion to settle on the definitions and right form
+of proof.  I think Euler's simple theorem about regular polyhedra was
+one, even.
+
+\noindent{\bf PUPIL EPSILON:}  I'm not sure I like this being a matter
+of trusting a social process at all!  In mathematics, there \emph{is}
+some way for experts to check each other, and to be honest, the stakes
+aren't as high as with a self-driving car or a mission to Mars.
+Groups of experts make mistakes all the time, especially if they are
+on the same ``team'' and subject to groupthink.  One person's dominant
+personality should not drive a discussion of how to make a safe and
+reliable computer system!
+
+\noindent{\bf PUPIL DELTA:} Of course.  But what else is there?  After
+all, deliberation by the body of people who are in a position to make
+a decision, by a social process, is how we determine who runs the country, a jury
+of peers is how we decide if a person should go to jail or not, and so
+forth.  In these cases, the people are far \emph{less} expert.  And
+more is usually at stake!  Science and math also, basically operate
+that way.  That's peer review.
+
+\noindent{\bf PUPIL EPSILON:}  Sure, but I think the issue is ``what
+else is there?''  It seems to me that computers offer us a chance to
+finally do better, in certain limited parts of life.  Take proofs.
+Before computers, proofs were inevitably checked by other
+mathematicians.  The idea of reducing the steps in proofs to such
+simple ones that other people could check the proofs exactly was, I
+think, tossed around, Leibniz and those people.  But it couldn't work,
+because nobody has the patience or attention to detail.  But before
+computers, nobody also had the patience or attention to detail to
+produce perfect logarithm tables.  Babbage's dream in part was to
+replace legions of inattentive country clergy computing logarithms
+poorly with a machine pumping them out perfectly.  To an extent he
+woudln't have though possible, we have that now, and not just for
+arithmetic problems, but with symbolic math tools.  There are people
+who work on automated theorem provers, and while those aren't
+replacing mathematicians or checking proofs like Fermat's last theorem
+yet, I think there are people who have the basics of automatic
+\emph{proof checking.}
+
+\noindent{\bf PUPIL DELTA:}   Fine, but that's \emph{not} relevant to
+my problem.  That's not checking $\mathcal{S}$.  It's checking the
+proof $\mathcal{P}$.  Hmm, we called the program $\mathcal{P}$.  The
+proof $\mathcal{Q}$ for ``QED''.
+
+\noindent{\bf PUPIL EPSILON:}  Yes, there's nothing for your problem
+right now.  That's why we have so many buggy specifications, not just
+buggy programs.  But I think we should dream big, like Leibniz.  Sure,
+his methods were fantastical at the time, so were Babbage's.  We can
+dream about how to address the $\mathcal{S}$ problem, too!
+
+
+\noindent{\bf PUPIL BETA:} Frankly, I don't think this problem of knowing if
 you've proved or tested the right specification is quite as hard as
 you all seem to think. I grant that \emph{sometimes} it is, but I
 think often we have a program like this one, where it's easy.  Not
@@ -308,8 +377,9 @@ this class, to get it seriously wrong!
 using binary search on an array with duplicates?  The result won't
 always be the same as for linear search  then.
 
-\noindent{\bf PUPIL BETA:} Oh, fine, we can just check that if both
-return that the value is found,  the right value is present in both
+\noindent{\bf PUPIL BETA:} Oh, fine, we can just say that if both
+return that the value is found, but they report different positions,
+we'll check if the right value is present in both
 positions.
 
 \noindent{\bf PUPIL GAMMA:} But then you are only using the linear
@@ -335,7 +405,7 @@ That seems like a very nice way to test some things.
 
 \noindent{\bf PUPIL DELTA:}  Yes, yes, that sounds practical.  But it
 doesn't really address the underlying problem at all.  It's a cheap
-hack that's sometimes available.  But how do we know the ``simple''
+hack that's sometimes available. How do we know the ``simple''
 file system or compiler's ``idea of what it should do'' is right?  How
 do we trust any specification that's too complicated to fit inside a
 person's head.  Or, really, like we said, to fit inside multiple heads
@@ -345,7 +415,17 @@ just pushing the problem back one step, in a small set of cases, and
 the same issue really comes up for the simple verison, if the problem
 at hand is at all complicated, like your examples.
 
-{\bf --------------------------------------}
+\noindent{\bf PUPIL EPSILON:}   It's still a partial solution, like I
+suggested. Somteimes this will make the $\mathcal{S}$-problem easier.
+That's a step in the right direction, and I'd rather trust that a
+simple, non-optimizing, C compiler is right than trust that {\tt gcc
+  -O3} does the right thing!
+
+\noindent{\bf PUPIL BETA:}  Alpha, you've been awful quiet, that's not
+like you. Is something wrong?
+
+\noindent{\bf PUPIL ALPHA:}  No, I'm just thinking about the code.
+Which the rest of you seem to have abandoned.
 
 \noindent{\bf PUPIL GAMMA:}  One thing that worries me is that we're
 talking as if the program  $\mathcal{P}$ is just finished, once and
@@ -370,7 +450,8 @@ proof isn't something you can run.   You have to look at the proof and
 the changed code, and think about whether the change breaks the
 proof.  Another chance for human mistakes!
 
-\noindent{\bf PUPIL EPSILON:} There are automated proofs, where a
+\noindent{\bf PUPIL EPSILON:} There are automated proofs, like I said,
+where a
 computer produces the proof, or at least checks that it's correct.
 
 \noindent{\bf PUPIL DELTA:} Sure, but I think the tools for generating
@@ -379,27 +460,216 @@ might change, but right now it's true.  And the checkers don't seem
 that helpful here:  I bet when you change your program, the
 proof-checker just always says ``your proof no longer works.''
 
+\noindent{\bf PUPIL EPSILON:}   In general, I think you're right. But
+there are some limited tools that are almost fully automatic I think.
+The Turing Award in 2007 was given for a technique called model
+checking, that is fairly limited in application, but really does, sort of,
+compute the proof automatically.  We talked about it in automata
+theory class.
+
+\noindent{\bf PUPIL DELTA:}  This does suggest a way to think
+abstractly, though not practically, about how good a test, or proof...
+or maybe even an $\mathcal{S}$ is?  We want to know \emph{how many bugs does
+  it catch?}  Of course, that's sort of useless.  We don't know all
+the bugs there might be, or I guess we'd just go down that list and
+check for each of them.  The list of all bugs is just a kind of ``super-$\mathcal{S}$''.  But it can get us a little beyond just
+$\mathcal{S}$, in that if we have a program, and we release it to
+users, and they complain about some awful behavior, even if we failed
+to put ``no doing that!'' in $\mathcal{S}$, we can easily agree it's
+bad, and revise $\mathcal{S}$.  That bad behavior is in the ``set of
+all bugs'' at least in theory.
+
+\noindent{\bf PUPIL EPSILON:}  Yes, but I'm looking for practical
+solutions, ways computers could help us out.
+
+\noindent{\bf PUPIL DELTA:}  Sometimes thinking about the problem
+definition in the most abstract terms can be practical, you know.
+That's part of the lesson of philosophy.
+
+\noindent{\bf PUPIL BETA:}  Oh brother.
+
+\noindent{\bf PUPIL EPSILON:}  No, wait.  I think you have something
+there.  Imagine a ``bugginator'' -- a computer program that takes
+another computer program, and changes it to all possible buggy
+versions.  Now, if we have a bugginator, the opposite of a
+``debugger'' if a debugger did what it says on the tin, I guess, then
+we could get somewhere.  We could just run the bugginator, and run all
+our tests and check all our proofs.  Every bug that isn't detected
+either shows a problem with our tests, or with our proofs, OR with
+$\mathcal{S}$.  There would be some work in figuring out which one, of
+course, maybe hard work.  But it'd be concrete and practical.  I mean,
+this is basically what we do in Delta's scenario of customers
+reporting problems or a Mars probe mysteriously crashing.  We do a
+post-mortem and if the problem really is a software problem, we end up
+changing the program, but if we're diligent engineers we obviously fix
+up our tests, that's what regression testing is, and nobody can argue
+that's some impractical thing that nobody in industry can use.
+
+\noindent{\bf PUPIL GAMMA:}  One little problem, again.   We don't
+have a bugginator.  How can you make a bugginator?
+
+\noindent{\bf PUPIL EPSILON:}   Ok, you can't.  But perhaps you could
+make a partial bugginator.  Inject \emph{some} bugs automatically.  I
+guess the lousy version would be to hire people to inject bugs.  Or
+maybe an LLM can come up with good bugs?
+
+\noindent{\bf PUPIL DELTA:}  I don't know how you'd get a good sample,
+and I don't trust LLMs not to just make up the kinds of bugs engineers
+already think about.  You'd want something principled, that comes up
+with bug scenarios nobody normal will ever think of, the way the
+fuzzers we saw in the software security class
+come up with program inputs nobody considers.
+
+\noindent{\bf PUPIL EPSILON:}  That's it!  Those fuzzers like AFL are
+called mutation-based fuzzers because their basic loop is taking some
+input, and changing it a little bit to see what the program does with
+the mutated input.  So we get bugs for the bugginator by making small
+random changes to $\mathcal{P}$.  You could call them ``mutants'' to
+distinguish them from the set of all bugs, these are a sample that's
+biased to things that are ``very close'' to the program we're
+interested in, but it seems reasonable that most programs are fairly
+close to correct, so the making small changes should make the program
+``almost'' correct but not quite.
+
+\noindent{\bf PUPIL GAMMA:}   Not bad, not bad.  The bug the Dr. Omega
+made is very close to the correct version of binary search.  So you'd
+surely include that kind of thing among your ``mutants.''   You don't
+even need anything smart here, you could just write some dumb thing
+with regular expressions to change arithmetic operators, or
+comparisons, or invert {\tt if} conditions.
+
+\noindent{\bf PUPIL EPSILON:}  I bet just commenting out random lines
+of code could get you somewhere.
+
+\noindent{\bf PUPIL GAMMA:} Let's go over to my dorm room and write
+one of these.  I'd like to see how good my tests and my $\mathcal{S}$
+are for the operating systems project.
+
+\vspace{0.1in}
+
+\emph{(All but one of the students walk out of the classroom, Beta and Delta holding
+  hands (they are dating), Epsilon and Gamma discussing whether to
+  write their bugginator in Python or Rust, Sigma talking on the
+  phone, asking another student about hitting the gym.)}
+
+\vspace{0.1in}
+
+\noindent{\bf PUPIL ALPHA:}  Guys?  Guys?  I think the code is still
+wrong.  What happens if the size of {\tt a} is so big that {\tt high}
+plus {\tt low} overflows?  I don't think your bugginator would catch
+that problem with the proof or the tests or the specification.  The
+real problem is the specification and proof and tests all assume
+something about how big an array we want, and I think a proof might
+assume an {\tt int} is an actual integer, not a computer int.  This is a problem
+of the imagination.  How do we get an imaginator?
+
+
+\begin{figure*}
+  {\scriptsize
+  \begin{code}
+\#define MAX\_SIZE 10
+
+int main () \{
+  int a[MAX\_SIZE];
+  int SIZE = nondet\_int();
+  \_\_CPROVER\_assume(SIZE > 0);
+  \_\_CPROVER\_assume(SIZE <= MAX\_SIZE);
+  int k = nondet\_int();
+  int present = 0;
+  for (int i = 0; i < SIZE; i++) \{
+    a[i] = nondet\_int();
+    if (i > 0) \{
+      \_\_CPROVER\_assume(a[i] >= a[i-1]);
+    \}
+    if (a[i] == k) \{
+      present = 1;
+    \}
+  \}
+
+  int r = binsearch(a, k, SIZE);
+  if (r != -1) \{
+    assert(a[r] == k);
+  \} else \{
+    assert(!present);
+  \}
+  \}
+\end{code}
+}
+\caption{CBMC Proof Harness for Binary Search}
+\label{fig:cbmc}
+\end{figure*}
+
+
+\begin{figure*}
+{\scriptsize
+  \begin{code}
+\#include <algorithm>
+\#include <deepstate/DeepState.hpp>
+
+using namespace deepstate;
+
+\#define MAX\_SIZE 32
+
+TEST(Run, Bentley) \{
+  int a[MAX\_SIZE];
+  unsigned int SIZE = DeepState\_UIntInRange(1, MAX\_SIZE);
+  int k = DeepState\_Int();
+  int present = 0;
+
+  for (int i = 0; i < SIZE; i++) \{
+    a[i] = DeepState\_Int();
+    if (a[i] == k) \{
+      present = 1;
+    \}
+  \}
+  std::sort(std::begin(a), \&a[SIZE]);
+  if (!present \&\& DeepState\_Bool()) \{
+    k = a[DeepState\_UIntInRange(0, SIZE-1)];
+    present = 1;
+  \}
+
+  int r = binsearch(a, k, SIZE);
+  if (r != -1) \{
+    assert(a[r] == k);
+  \} else \{
+    assert(!present);
+  \}
+\}
+\end{code}
+}
+\caption{DeepState Test Harness for Binary Search}
+\label{fig:deepstate}
+\end{figure*}
+
+\FloatBarrier
+
 \section{Postscript}
 
-This (polyphonic) dialogue is a tribute to, and reflection on, Imre Lakatos' classic
+
+
+This dialogue is a tribute to, and reflection on, Imre Lakatos' classic
 work, \emph{Proof and Refutation}~\cite{lakatos1963proofs}.  It also
 owes a debt to MacKenzie's more recent classic, \emph{Mechanizing
   Proof: Computing, Risk, and Trust}~\cite{mackenzie2004mechanizing}.
 To some extent the approach to thinking about proofs, tests, and their
 meaning that (some of) the students arrive at is based on a Popperian~\cite{Popper} falsification methodology proposed in
-work by my colleagues and myself~\cite{groce2015verified,groce2018verified}.
+work by my colleagues and
+myself~\cite{groce2015verified,groce2018verified}.  Finally, the
+initial discussion owes a substantial debt to De Millo, Lipton, and
+Perlis' (in)famous ``Social processes and proofs of theorems and programs''~\cite{de1979social}.
 
 The version of binary search that starts things rolling (and the bug
-that unsettles the class at the end) comes from Joshua Bloch's blog post~\cite{bloch} reporting
+that Alpha notices at the end) comes from Joshua Bloch's blog post~\cite{bloch} reporting
 the bug, and, thus, fundamentally, from Jon Bentley's original version ``proven
 correct'' in \emph{Programming Pearls}~\cite{Pearls}.  The code has
 been changed to C code.  The programs in question, and instructions
-for proving and testing (and mutating) them using CBMC~\cite{CBMCp} and
+for proving and testing (and mutating~\cite{MutationSurvey}) them using CBMC~\cite{CBMCp} and
 DeepState~\cite{goodman2018deepstate} (and UniversalMutator~\cite{SyntaxUM}), respectively,, can be found at
 \url{https://github.com/agroce/onward24code}.  Some brief notes on the
-connection between this code and the above follows.
+connections between this code and the imaginary classroom discussion follow.
 
 \subsection{CBMC}
+
 
 CBMC serves as an exemplar for \emph{proof}.  CBMC
 translates C programs into goto-programs, and, eventually, into SAT or
@@ -413,7 +683,9 @@ requires the use of a bound on loop unrollings.  However, in the case
 of binary search, a limit on unrollings of the search loop is part of
 the full specification of correctness, so the proof is complete (since
 CBMC can check that an execution exceeding provided loop bounds does
-not exist).
+not exist).  The ``harness'' for CBMC is shown in
+Figure~\ref{fig:cbmc}.  The code for binary search is omitted (see
+Figure~\ref{fig:first}).
 
 
 \subsection{DeepState}
@@ -430,6 +702,12 @@ programs, DeepState will quickly find a bug, and CBMC will simply
 exhaust the memory of the computer it is running on, and the patience
 of the user, without accomplishing much of anything.  How often this
 happens, vs. producing the bug quickly, however, is hard to know.
+
+The ``harness'' for DeepState is shown in Figure~\ref{fig:deepstate}.
+Again, the binary search code is omitted.  Note the larger size, due to the fact we
+have to ``help out'' the testing rather than simply use ASSUME
+statements to force sorting and rely on exhaustiveness to check cases
+where the item to be searched for is, in fact, present.
 
 \subsection{UniversalMutator}
 
