@@ -436,7 +436,8 @@ simple, non-optimizing, C compiler is right than trust that {\tt gcc
 like you. Is something wrong?
 
 \noindent{\bf PUPIL ALPHA:}  No, I'm just thinking about the code.
-Which the rest of you seem to have abandoned.
+Which the rest of you seem to have abandoned.  For instance, shouldn't
+that {\tt int size} really be a {\tt size\_t}?
 
 \noindent{\bf PUPIL GAMMA:}  One thing that worries me is that we're
 talking as if the program  $\mathcal{P}$ is just finished, once and
@@ -561,7 +562,8 @@ are for the operating systems project.
 \emph{(All but one of the students walk out of the classroom, Beta and Delta holding
   hands (they are dating), Epsilon and Gamma discussing whether to
   write their bugginator in Python or Rust, Sigma talking on the
-  phone, asking another student about hitting the gym.)}
+  phone, asking another student about hitting the gym. All is quiet
+  for five minutes.  Then...)}
 
 \vspace{0.1in}
 
@@ -659,8 +661,9 @@ TEST(Run, Bentley) \{
 
 
 This dialogue is a tribute to, and reflection on, Imre Lakatos' classic
-work, \emph{Proof and Refutation}~\cite{lakatos1963proofs}.  It also
-owes a debt to MacKenzie's more recent classic, \emph{Mechanizing
+ \emph{Proofs and Refutation}~\cite{lakatos1963proofs}.  It also
+owes a debt to MacKenzie's more recent sociological exploration of the
+same issues, \emph{Mechanizing
   Proof: Computing, Risk, and Trust}~\cite{mackenzie2004mechanizing}.
 To some extent the approach to thinking about proofs, tests, and their
 meaning that (some of) the students arrive at is based on a Popperian~\cite{Popper} falsification methodology proposed in
@@ -704,7 +707,7 @@ Figure~\ref{fig:first}).
 DeepState exemplifies \emph{tests}.  While DeepState can make use of
 symbolic execution, which can more resemble proof, if is primarily
 used in conjunction with the more scalable approaches of random
-testing and coverage-guided fuzzing.  The key idea is that while a
+testing and coverage-guided mutation-based fuzzing (e.g., with AFL~cite{aflfuzz}).  The key idea is that while a
 CBMC output of ``correct'' indicates that the program input satisfies
 its specification (though not, as our students discuss, that the
 specification itself is correct), DeepState may run for days without
@@ -716,17 +719,24 @@ happens, vs. producing the bug quickly, however, is hard to know.
 
 The ``harness'' for DeepState is shown in Figure~\ref{fig:deepstate}.
 Again, the binary search code is omitted.  Note the larger size, due to the fact we
-have to ``help out'' the testing rather than simply use ASSUME
-statements to force sorting and rely on exhaustiveness to check cases
+have to ``help out'' the testing rather than simply using {\tt ASSUME}
+statements to force sorting and relying on exhaustiveness to check cases
 where the item to be searched for is, in fact, present.
 
 \subsection{UniversalMutator}
 
 Finally, the idea of mutation is represented by UniversalMutator, which mutates code
-in C and a number of other languages.  UniversalMutator, like other
-mutation tools, acts as a limited version of Epsilon's hypothetical
+in C and a number of other languages, using a more sophisticated
+version of the approach proposed by Gamma~\cite{SyntaxUM}.  UniversalMutator, like other
+mutation tools, acts as a very limited version of Epsilon's hypothetical
 ``bugginator.''
 
+\section{Postscript to the Postscript}
+
+During the final preparation of the test harnesses for this essay, the
+author ran into a bug (in the test harness) that required 4 CS PhDs
+from one of the top computer science schools in the world about 15
+minutes to figure out.  So it goes.
 
 \bibliographystyle{plain}
 \bibliography{bibliography}
