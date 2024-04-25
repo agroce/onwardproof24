@@ -144,7 +144,7 @@ This essay consists of an imaginary discussion among a group of
 
 The dialogue takes place in a classroom.  The last class of the day
 has finished, and the professor is packing up laptop, 
-display-adapter, and mouse, and even remembering to turn off the projection screen, as a few students remain sitting near each other.  The lingering students have become interested in a {\bf PROBLEM} (or perhaps simply caught up in an argument).
+display adapter, and mouse, and even remembering to turn off the projection screen, as a few students remain sitting near each other.  The lingering students have become interested in a {\bf PROBLEM} (or perhaps simply caught up in an argument).
 
 \vspace{0.1in}
 
@@ -161,7 +161,7 @@ display-adapter, and mouse, and even remembering to turn off the projection scre
 \vspace{0.1in}
 
 \noindent{\bf PUPIL DELTA:} \emph{(sotto voce)} That's because
-Dr. Omega is a bit of an absentminded flake.
+Dr. Omega is a bit of an absent-minded flake.
 
 \vspace{0.1in}
 
@@ -179,7 +179,7 @@ correct now.  Look at the code...
 \begin{figure*}
   {\scriptsize
   \begin{code}
-int binsearch(int* a, int key, int size) \{
+int binsearch(int* a, int key, unsigned int size) \{
   int low = 0;
   int high = size - 1;
   
@@ -339,7 +339,7 @@ finally do better, in certain limited parts of life.  Take proofs.
 Before computers, proofs were inevitably checked by other
 mathematicians.  The idea of reducing the steps in proofs to such
 simple ones that other people could check the proofs exactly was, I
-think, tossed around, Leibniz and those people.  But it couldn't work,
+think, tossed around, by Leibniz and company.  But it couldn't work,
 because nobody has the patience or attention to detail.  But before
 computers, nobody also had the patience or attention to detail to
 produce perfect logarithm tables.  Babbage's dream in part was to
@@ -427,9 +427,9 @@ the same issue really comes up for the simple verison, if the problem
 at hand is at all complicated, like your examples.
 
 \noindent{\bf PUPIL EPSILON:}   It's still a partial solution, like I
-suggested. Somteimes this will make the $\mathcal{S}$-problem easier.
+suggested. Sometimes this will make the $\mathcal{S}$-problem easier.
 That's a step in the right direction, and I'd rather trust that a
-simple, non-optimizing, C compiler is right than trust that {\tt gcc
+simple non-optimizing C compiler is right than trust that {\tt gcc
   -O3} does the right thing!
 
 \noindent{\bf PUPIL BETA:}  Alpha, you've been awful quiet, that's not
@@ -437,7 +437,7 @@ like you. Is something wrong?
 
 \noindent{\bf PUPIL ALPHA:}  No, I'm just thinking about the code.
 Which the rest of you seem to have abandoned.  For instance, shouldn't
-that {\tt int size} really be a {\tt size\_t}?
+that {\tt unsigned int size} really be a {\tt size\_t}?
 
 \noindent{\bf PUPIL GAMMA:}  One thing that worries me is that we're
 talking as if the program  $\mathcal{P}$ is just finished, once and
@@ -543,7 +543,7 @@ interested in, but it seems reasonable that most programs are fairly
 close to correct, so the making small changes should make the program
 ``almost'' correct but not quite.
 
-\noindent{\bf PUPIL GAMMA:}   Not bad, not bad.  The bug the Dr. Omega
+\noindent{\bf PUPIL GAMMA:}   Not bad, not bad.  The bug that Dr. Omega
 made is very close to the correct version of binary search.  So you'd
 surely include that kind of thing among your ``mutants.''   You don't
 even need anything smart here, you could just write some dumb thing
@@ -567,7 +567,7 @@ are for the operating systems project.
 
 \vspace{0.1in}
 
-\noindent{\bf PUPIL ALPHA:}  Guys?  Guys?  I think the code is still
+\noindent{\bf PUPIL ALPHA:}  Hey!  Where'd you all go??? I think the code is still
 wrong.  What happens if the size of {\tt a} is so big that {\tt high}
 plus {\tt low} overflows?  I don't think your bugginator would catch
 that problem with the proof or the tests or the specification.  The
@@ -584,7 +584,7 @@ of the imagination.  How do we get an imaginator?
 
 int main () \{
   int a[MAX\_SIZE];
-  int SIZE = nondet\_int();
+  unsigned int SIZE = nondet\_uint();
   \_\_CPROVER\_assume(SIZE > 0);
   \_\_CPROVER\_assume(SIZE <= MAX\_SIZE);
   int k = nondet\_int();
@@ -658,9 +658,8 @@ TEST(Run, Bentley) \{
 
 \section{Postscript}
 
-
-
-This dialogue is a tribute to, and reflection on, Imre Lakatos' classic
+This dialogue is a tribute to, and reflection on, Imre Lakatos'
+classic book-length dialogue
  \emph{Proofs and Refutation}~\cite{lakatos1963proofs}.  It also
 owes a debt to MacKenzie's more recent sociological exploration of the
 same issues, \emph{Mechanizing
@@ -668,10 +667,16 @@ same issues, \emph{Mechanizing
 To some extent the approach to thinking about proofs, tests, and their
 meaning that (some of) the students arrive at is based on a Popperian~\cite{Popper} falsification methodology proposed in
 work by my colleagues and
-myself~\cite{groce2015verified,groce2018verified}.  Finally, the
-initial discussion owes a substantial debt to De Millo, Lipton, and
+myself~\cite{groce2015verified,groce2018verified}.  All of these works
+concern efforts to \emph{refute} the completeness or correctness of an
+intellectual object, be it a mathematical definition, a mathematical
+proof, a computer program, or a specification of a computer program.
+The suggestive near-equivalences between the first two classes and the second two
+classes are instructive, as is the similarity of both to the process of
+scientific hypothesis and potentially falsifying experiment so central
+to Popper's work.
+Finally, the initial discussion owes a substantial debt to De Millo, Lipton, and
 Perlis' (in)famous ``Social processes and proofs of theorems and programs''~\cite{de1979social}.
-
 The version of binary search that starts things rolling (and the bug
 that Alpha notices at the end) comes from Joshua Bloch's blog post~\cite{bloch} reporting
 the bug, and, thus, fundamentally, from Jon Bentley's original version ``proven
@@ -681,6 +686,18 @@ for proving and testing (and mutating~\cite{MutationSurvey}) them using CBMC~\ci
 DeepState~\cite{goodman2018deepstate} (and UniversalMutator~\cite{SyntaxUM}), respectively,, can be found at
 \url{https://github.com/agroce/onward24code}.  Some brief notes on the
 connections between this code and the imaginary classroom discussion follow.
+
+While linear search is a poor specification for binary search,
+differential testing is indeed a powerful tool, widely used in compiler, file
+system~\cite{ICSEDiff}, and container library testing, among other places.  Introduced
+into the literature by McKeeman's classic paper focused on
+compilers~\cite{Differential}, it has likely been independently
+discovered many times in the history of testing.
+
+Similarly, the ``just check 1'' approach discussed briefly relates to
+ideas of using informal ``small model properties'' and, more
+generally, bounded exhaustive testing~\cite{sullivan2004software},
+as well as other heuristics for effective bug-finding.
 
 \subsection{CBMC}
 
@@ -692,7 +709,7 @@ counterexample to the properties to be checked.  A proof of
 unsatisfiability then is a proof of correctness for the program.
 
 Strictly speaking, the
-proof can be partial: CBMC is a \emph{bounded} model checker, and so
+proof can be partial: CBMC is a \emph{bounded} model checker~\cite{BMC}, and so
 requires the use of a bound on loop unrollings.  However, in the case
 of binary search, a limit on unrollings of the search loop is part of
 the full specification of correctness, so the proof is complete (since
@@ -707,7 +724,7 @@ Figure~\ref{fig:first}).
 DeepState exemplifies \emph{tests}.  While DeepState can make use of
 symbolic execution, which can more resemble proof, if is primarily
 used in conjunction with the more scalable approaches of random
-testing and coverage-guided mutation-based fuzzing (e.g., with AFL~cite{aflfuzz}).  The key idea is that while a
+testing and coverage-guided mutation-based fuzzing (e.g., with AFL~\cite{aflfuzz}).  The key idea is that while a
 CBMC output of ``correct'' indicates that the program input satisfies
 its specification (though not, as our students discuss, that the
 specification itself is correct), DeepState may run for days without
@@ -715,7 +732,8 @@ finding a bug in an incorrect program.  On the other hand, for some
 programs, DeepState will quickly find a bug, and CBMC will simply
 exhaust the memory of the computer it is running on, and the patience
 of the user, without accomplishing much of anything.  How often this
-happens, vs. producing the bug quickly, however, is hard to know.
+happens, vs. CBMC producing the bug quickly, if one exists, is hard to
+know.
 
 The ``harness'' for DeepState is shown in Figure~\ref{fig:deepstate}.
 Again, the binary search code is omitted.  Note the larger size, due to the fact we
@@ -723,20 +741,24 @@ have to ``help out'' the testing rather than simply using {\tt ASSUME}
 statements to force sorting and relying on exhaustiveness to check cases
 where the item to be searched for is, in fact, present.
 
+DeepState is one of many property-based testing~\cite{ClaessenH00,goldstein2024property} tools, unusual in that
+it allows the use of state-of-the-art fuzzers for testing the
+properties, and defines tests as parameterized/generalized unit
+tests~\cite{ParamUnit}, with a syntax similar to that of Google's
+GoogleTest framework~\cite{GoogleTest}.  Property-based testing is
+likely to become far more popular in the future, and could be tightly integrated
+with mutation testing, to make it easier to invent and
+improve properties.
+
 \subsection{UniversalMutator}
 
-Finally, the idea of mutation is represented by UniversalMutator, which mutates code
+Finally, the idea of mutation testing is represented by UniversalMutator, which mutates code
 in C and a number of other languages, using a more sophisticated
 version of the approach proposed by Gamma~\cite{SyntaxUM}.  UniversalMutator, like other
-mutation tools, acts as a very limited version of Epsilon's hypothetical
-``bugginator.''
+mutation tools, acts as a very limited version of Epsilon's
+hypothetical 
+``bugginator.''  The imaginator remains up to us.
 
-\section{Postscript to the Postscript}
-
-During the final preparation of the test harnesses for this essay, the
-author ran into a bug (in the test harness) that required 4 CS PhDs
-from one of the top computer science schools in the world about 15
-minutes to figure out.  So it goes.
 
 \bibliographystyle{plain}
 \bibliography{bibliography}
