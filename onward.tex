@@ -144,7 +144,17 @@ This essay consists of an imaginary discussion among a group of
 
 The dialogue takes place in a classroom.  The last class of the day
 has finished, and the professor is packing up laptop, 
-display adapter, and mouse, and even remembering to turn off the projection screen, as a few students remain sitting near each other.  The lingering students have become interested in a {\bf PROBLEM} (or perhaps simply caught up in an argument).
+display adapter, and mouse, and even remembering to turn off the
+projection screen, as a few students remain sitting near each other.
+The lingering students have become interested in a {\bf PROBLEM} (or
+perhaps simply caught up in an argument).
+
+The students ``recorded'' below do not, for the most part, stand in for particular stances
+on software correctness; indeed, many of the students shift their
+positions around as the discussion ranges (which, in fact, is possibly
+a more accurate encapsulation of the intellectual careers of most
+thinkers on these topics, albeit ludicrously compressed in temporal
+terms, than a monolithic point of view would be!)
 
 \vspace{0.1in}
 
@@ -474,7 +484,7 @@ proof-checker just always says ``your proof no longer works.''
 
 \noindent{\bf PUPIL EPSILON:}   In general, I think you're right. But
 there are some limited tools that are almost fully automatic I think.
-The Turing Award in 2007 was given for a technique called model
+The Turing Award in 2007 was given\footnote{to Clarke, Emerson, and Sifakis}for a technique called model
 checking, that is fairly limited in application, but really does, sort of,
 compute the proof automatically.  We talked about it in automata
 theory class.
@@ -654,8 +664,6 @@ TEST(Run, Bentley) \{
 \label{fig:deepstate}
 \end{figure}
 
-\FloatBarrier
-
 \section{Postscript}
 
 This dialogue is a tribute to, and reflection on, Imre Lakatos'
@@ -676,8 +684,69 @@ classes are instructive, as is the similarity of both to the process of
 scientific hypothesis and potentially falsifying experiment so central
 to Popper's work.
 Finally, the initial discussion owes a substantial debt to De Millo, Lipton, and
-Perlis' (in)famous ``Social processes and proofs of theorems and programs''~\cite{de1979social}.
-The version of binary search that starts things rolling (and the bug
+Perlis' (in)famous ``Social processes and proofs of theorems and
+programs''~\cite{de1979social}.
+
+\subsection{Dijkstra's Objection}
+
+To speak of these topics, in this way is, possibly, to infuriate the
+ghost of Edsger Dijkstra.  In a 1977 position paper~\cite{dijkstra1977position}, Dijkstra argued
+that discussing (other than, I assume, in formal terms of vacuity and
+contradiction) $\mathcal{S}$ was, essentially, beyond the scope of the
+\emph{scientific enterprise}:  best left to the general public, the
+user (who may be sometimes ``written down as a fool''), or other
+unspecified decisionmakers.  Dijkstra's concluding words are a
+forthright challenge to this essay:
+
+\begin{quote}
+  As furthermore no scientific fruits are to be expected from dealing with fundamentally non-scientific issues, the scientist is justified in experiencing dealing with the non-scientific issue not only as a neglect of duty, but even as a waste of time.
+
+P.S. The reader is mistaken if he thinks that he can send me a copy of Imre Lakatos’s \emph{Proofs and Refutations} for my education.
+\end{quote}
+
+Two responses are possible.  First, there is what I consider the
+``coward's response:''  this is an essay, not a research paper, and
+the discussion, as with the students, is not meant to contribute to
+science, but as a member of the general public, or perhaps a fool;
+certainly as an individual (like the students, as early in their
+careers as it may be for them to have accomplished much along those
+lines) who has sometimes been reasonably written down for a fool for
+conceiving a poor specification.  I think this reasonable, but argues
+too little.
+
+That's because Dijkstra was simply wrong, I think, that there is no scientific or
+mathematical way to approach the problem of the general suitabiltiy of
+$\mathcal{S}$. it is certainly a hard problem, and one where purely mathematical
+techniques are very likely \emph{limited} in effectiveness, but it is not outside the
+scope of (computer) science, because it is possible to automate some of the
+process of refutation and produce meaningful \emph{quantitative} measures of how much
+$\mathcal{S}$ ``leaves out'' in terms of behaviors not prohibited.
+The bugginator is reality.
+
+
+I add that in a sense my personal sympathies do lie with
+Dijkstra.  My own research interests have focused on non-social methods
+for finding faults in software systems, those involving the execution
+of complex computer programs, not the modification of development
+processes, other than in the sense of incorporating the use of tools.
+The simple fact is, however, that such tools can help identify cases
+where the specification itself should be questioned, and offer
+opportunities to refine and revise $\mathcal{S}$ that do not arise
+from a social process, but from a computation.
+
+Furthermore, while Dijkstra might object to ``bugginator'' uses that
+rely on testing, of which Dijkstra was notoriously skeptical, it is
+possibly to make use of mutants in fully formal proof-based settings.  This would
+normally only be done in the context of automated proofs, for
+practical reasons, but clarifies where I think Dijkstra would object
+most strongly to the approach this essay endorses.  Of testing, he said that it can only show the presence
+of bugs, not their absence; of mutation he would, I suspect, say that
+it can only show the presence of (potential) bugs not captured by a
+specification, not their absence.  In that, he is correct.
+
+\section{Further Notes on Code and Tools / Code to Accompany the Dialogue}
+
+The specific version of binary search that starts things rolling (and the bug
 that Alpha notices at the end) comes from Joshua Bloch's blog post~\cite{bloch} reporting
 the bug, and, thus, fundamentally, from Jon Bentley's original version ``proven
 correct'' in \emph{Programming Pearls}~\cite{Pearls}.  The code has
