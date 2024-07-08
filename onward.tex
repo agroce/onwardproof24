@@ -316,7 +316,7 @@ should work.  They talk to test engineers, developers, users.
 
 \noindent{\bf PUPIL DELTA:} You know, that sounds like what really
 happens.  Trusting Sigma alone is no good, but a bunch of Sigmas...  I
-don't konw if that's ideal, but it's not nearly as bad.  And in
+don't know if that's ideal, but it's not nearly as bad.  And in
 practice, it's what we have to rely on.  Even mathematical ``proofs''
 are just things enough mathematicians agree to call proofs.  It
 happens that in math, unlike in philosophy, there's pretty frequent
@@ -687,6 +687,34 @@ Finally, the initial discussion owes a substantial debt to De Millo, Lipton, and
 Perlis' (in)famous ``Social processes and proofs of theorems and
 programs''~\cite{de1979social}.
 
+A somewhat different (but still related) approach, less explicitly
+presented in the dialogue, is that presented in, e.g., Turner's
+\emph{Computational Artifacts}~\cite{turner2018computational}, where
+programs are seen as \emph{machines} with a human-intended
+\emph{purpose}.  It is interesting to consider that while metaphors
+from this viewpoint are common (e.g., ``factory methods'') in the
+field, the literature of program correctness is much more atuned to
+programs as mathematical than as industrial artifacts (or, more
+generally, as teleological products, like the wheel or the axe, of \emph{homo faber}).
+
+The general issue of trust focusing on specifications, rather than
+programs, may well loom larger in the future, if LLM or other AI-based
+methods bring ``program synthesis'' (and, especially, potentially
+hallucinatory and certainly stochastic, program synthesis) broadly
+conceived, into wider usage.  One promising point is that while LLMs
+can produce programs, which are hard to check, they can also produce
+tests~\cite{gpttestgen,siddiq2023empirica}, which as the dialogue
+suggests, may simplify the problem of trust.
+
+Finally, the author was surprised to learn that Petricek, in 2017,
+produced a very interesting dialogue, also featuring pupils Beta, Alpha, and so forth, in
+similar homage to Lakatos, and covering some of the same topics as
+this essay~\cite{DBLP:journals/programming/000117}!  Reading both
+essays shows how much divergence is possible even given what amounts
+to the same starting point, and the same unusual approach to similar
+topics, and, for that matter, a probably substantial agreement by the
+authors on certain core issues.
+
 \subsection{Dijkstra's Objection}
 
 To speak of these topics, in this way is, possibly, to infuriate the
@@ -707,11 +735,12 @@ P.S. The reader is mistaken if he thinks that he can send me a copy of Imre Laka
 Two responses are possible.  First, there is what I consider the
 ``coward's response:''  this is an essay, not a research paper, and
 the discussion, as with the students, is not meant to contribute to
-science, but as a member of the general public, or perhaps a fool;
+science; the author is acting as a member of the general public, or perhaps a fool;
 certainly as an individual (like the students, as early in their
 careers as it may be for them to have accomplished much along those
 lines) who has sometimes been reasonably written down for a fool for
-conceiving a poor specification.  I think this reasonable, but argues
+conceiving a poor specification.  I think this is a reasonable
+argument, but it argues
 too little.
 
 That's because Dijkstra was simply wrong, I think, that there is no scientific or
@@ -728,7 +757,7 @@ I add that in a sense my personal sympathies do lie with
 Dijkstra.  My own research interests have focused on non-social methods
 for finding faults in software systems, those involving the execution
 of complex computer programs, not the modification of development
-processes, other than in the sense of incorporating the use of tools.
+processes, other than in the sense of incorporating the use of such tools.
 The simple fact is, however, that such tools can help identify cases
 where the specification itself should be questioned, and offer
 opportunities to refine and revise $\mathcal{S}$ that do not arise
@@ -736,7 +765,7 @@ from a social process, but from a computation.
 
 Furthermore, while Dijkstra might object to ``bugginator'' uses that
 rely on testing, of which Dijkstra was notoriously skeptical, it is
-possibly to make use of mutants in fully formal proof-based settings.  This would
+possible to make use of mutants in fully formal proof-based settings.  This would
 normally only be done in the context of automated proofs, for
 practical reasons, but clarifies where I think Dijkstra would object
 most strongly to the approach this essay endorses.  Of testing, he said that it can only show the presence
@@ -746,11 +775,12 @@ specification, not their absence.  In that, he is correct.
 
 \section{Further Notes on Code and Tools / Code to Accompany the Dialogue}
 
-The specific version of binary search that starts things rolling (and the bug
-that Alpha notices at the end) comes from Joshua Bloch's blog post~\cite{bloch} reporting
-the bug, and, thus, fundamentally, from Jon Bentley's original version ``proven
-correct'' in \emph{Programming Pearls}~\cite{Pearls}.  The code has
-been changed to C code.  The programs in question, and instructions
+The specific version of binary search that starts things rolling comes from Joshua Bloch's blog post~\cite{bloch} reporting
+the bug the Alpha brilliantly detects.  It thus comes, fundamentally, from Jon Bentley's original version ``proven
+correct'' in \emph{Programming Pearls}~\cite{Pearls}; proving binary
+search has a long pedigree in the literature, e.g., back to
+Hoare~\cite{hoare1971proof}.  Bloch's version  has
+been changed from Java to C code.  The programs in question, and instructions
 for proving and testing (and mutating~\cite{MutationSurvey}) them using CBMC~\cite{CBMCp} and
 DeepState~\cite{goodman2018deepstate} (and UniversalMutator~\cite{SyntaxUM}), respectively,, can be found at
 \url{https://github.com/agroce/onward24code}.  Some brief notes on the
