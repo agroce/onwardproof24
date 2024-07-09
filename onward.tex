@@ -543,9 +543,9 @@ generally, as teleological artifacts, like the wheel or the axe, of
 \emph{homo faber}).  This may be due to the Leibnizian dream of proofs
 and proof-checking; while engineers use scientific principles in
 design, no one really thinks that the model is the thing, or that a
-bridge can be ``proven'' rather than testing.  We wish it to be
+bridge can be ``proven'' rather than tested.  We wish it to be
 otherwise, with computer programs, so prefer not to think of them in
-this context as simply
+this context as 
 unfortunately over-complex, but strangely easy to copy, ``machines.''
 \end{minipage}}
 \vspace{0.1in}
@@ -613,7 +613,7 @@ methods bring ``program synthesis'' (and, especially, potentially
 hallucinatory, and certainly stochastic, program synthesis) broadly
 conceived, into wider usage.  One promising point is that while LLMs
 can produce programs, which are inherently \emph{hard} to check, they can also produce
-tests~\cite{gpttestgen,siddiq2023empirica}, which as the dialogue
+tests~\cite{gpttestgen,siddiq2023empirical}, which as the dialogue
 suggests, may simplify the problem of trust.  Or, as Delta is about to
 imply, it may not...
 \end{minipage}}
@@ -671,83 +671,6 @@ something about how big an array we want, and I think a proof might
 assume an {\tt int} is an actual integer, not a computer int.  This is a problem
 of the imagination.  How do we get an imaginator?
 
-
-\begin{figure}
-  {\scriptsize
-  \begin{code}
-\#define MAX\_SIZE 10
-
-int main () \{
-  int a[MAX\_SIZE];
-  unsigned int SIZE = nondet\_uint();
-  \_\_CPROVER\_assume(SIZE > 0);
-  \_\_CPROVER\_assume(SIZE <= MAX\_SIZE);
-  int k = nondet\_int();
-  int present = 0;
-  for (int i = 0; i < SIZE; i++) \{
-    a[i] = nondet\_int();
-    if (i > 0) \{
-      \_\_CPROVER\_assume(a[i] >= a[i-1]);
-    \}
-    if (a[i] == k) \{
-      present = 1;
-    \}
-  \}
-
-  int r = binsearch(a, k, SIZE);
-  if (r != -1) \{
-    assert(a[r] == k);
-  \} else \{
-    assert(!present);
-  \}
-  \}
-\end{code}
-}
-\caption{CBMC Proof Harness for Binary Search}
-\label{fig:cbmc}
-\end{figure}
-
-
-\begin{figure}
-{\scriptsize
-  \begin{code}
-\#include <algorithm>
-\#include <deepstate/DeepState.hpp>
-
-using namespace deepstate;
-
-\#define MAX\_SIZE 32
-
-TEST(Run, Bentley) \{
-  int a[MAX\_SIZE];
-  unsigned int SIZE = DeepState\_UIntInRange(1, MAX\_SIZE);
-  int k = DeepState\_Int();
-  int present = 0;
-
-  for (int i = 0; i < SIZE; i++) \{
-    a[i] = DeepState\_Int();
-    if (a[i] == k) \{
-      present = 1;
-    \}
-  \}
-  std::sort(std::begin(a), \&a[SIZE]);
-  if (!present \&\& DeepState\_Bool()) \{
-    k = a[DeepState\_UIntInRange(0, SIZE-1)];
-    present = 1;
-  \}
-
-  int r = binsearch(a, k, SIZE);
-  if (r != -1) \{
-    assert(a[r] == k);
-  \} else \{
-    assert(!present);
-  \}
-\}
-\end{code}
-}
-\caption{DeepState Test Harness for Binary Search}
-\label{fig:deepstate}
-\end{figure}
 
 \section{Postscript}
 
@@ -833,6 +756,84 @@ for proving and testing (and mutating~\cite{MutationSurvey}) them using CBMC~\ci
 DeepState~\cite{goodman2018deepstate} (and UniversalMutator~\cite{SyntaxUM}), respectively,, can be found at
 \url{https://github.com/agroce/onward24code}.  Some brief notes on the
 connections between this code and the imaginary classroom discussion follow.
+
+
+\begin{figure}
+  {\scriptsize
+  \begin{code}
+\#define MAX\_SIZE 10
+
+int main () \{
+  int a[MAX\_SIZE];
+  unsigned int SIZE = nondet\_uint();
+  \_\_CPROVER\_assume(SIZE > 0);
+  \_\_CPROVER\_assume(SIZE <= MAX\_SIZE);
+  int k = nondet\_int();
+  int present = 0;
+  for (int i = 0; i < SIZE; i++) \{
+    a[i] = nondet\_int();
+    if (i > 0) \{
+      \_\_CPROVER\_assume(a[i] >= a[i-1]);
+    \}
+    if (a[i] == k) \{
+      present = 1;
+    \}
+  \}
+
+  int r = binsearch(a, k, SIZE);
+  if (r != -1) \{
+    assert(a[r] == k);
+  \} else \{
+    assert(!present);
+  \}
+  \}
+\end{code}
+}
+\caption{CBMC Proof Harness for Binary Search}
+\label{fig:cbmc}
+\end{figure}
+
+
+\begin{figure}
+{\scriptsize
+  \begin{code}
+\#include <algorithm>
+\#include <deepstate/DeepState.hpp>
+
+using namespace deepstate;
+
+\#define MAX\_SIZE 32
+
+TEST(Run, Bentley) \{
+  int a[MAX\_SIZE];
+  unsigned int SIZE = DeepState\_UIntInRange(1, MAX\_SIZE);
+  int k = DeepState\_Int();
+  int present = 0;
+
+  for (int i = 0; i < SIZE; i++) \{
+    a[i] = DeepState\_Int();
+    if (a[i] == k) \{
+      present = 1;
+    \}
+  \}
+  std::sort(std::begin(a), \&a[SIZE]);
+  if (!present \&\& DeepState\_Bool()) \{
+    k = a[DeepState\_UIntInRange(0, SIZE-1)];
+    present = 1;
+  \}
+
+  int r = binsearch(a, k, SIZE);
+  if (r != -1) \{
+    assert(a[r] == k);
+  \} else \{
+    assert(!present);
+  \}
+\}
+\end{code}
+}
+\caption{DeepState Test Harness for Binary Search}
+\label{fig:deepstate}
+\end{figure}
 
 
 \subsection{CBMC}
