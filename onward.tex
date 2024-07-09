@@ -343,6 +343,34 @@ forth.  In these cases, the people are far \emph{less} expert.  And
 more is usually at stake!  Science and math also, basically operate
 that way.  That's peer review.
 
+
+\vspace{0.1in}
+\framebox{\begin{minipage}{0.4 \textwidth}
+{\bf COMMENTARY:}  This dialogue is a tribute to, and reflection on, Imre Lakatos'
+classic book-length dialogue
+ \emph{Proofs and Refutation}~\cite{lakatos1963proofs}.  It also
+owes a debt to MacKenzie's more recent sociological exploration of the
+same issues, \emph{Mechanizing
+  Proof: Computing, Risk, and Trust}~\cite{mackenzie2004mechanizing}.
+To some extent the approach to thinking about proofs, tests, and their
+meaning that (some of) the students arrive at is based on a Popperian~\cite{Popper} falsification methodology proposed in
+work by my colleagues and
+myself~\cite{groce2015verified,groce2018verified}.  All of these works
+concern efforts to \emph{refute} the completeness or correctness of an
+intellectual object, be it a mathematical definition, a mathematical
+proof, a computer program, or a specification of a computer program.
+The suggestive near-equivalences between the first two classes and the second two
+classes are instructive, as is the similarity of both to the process of
+scientific hypothesis and potentially falsifying experiment so central
+to Popper's work.
+Finally, the initial discussion owes a substantial debt to De Millo, Lipton, and
+Perlis' (in)famous ``Social processes and proofs of theorems and
+programs''~\cite{de1979social}.
+
+\end{minipage}}
+\vspace{0.1in}
+
+
 \noindent{\bf PUPIL EPSILON:}  Sure, but I think the issue is ``what
 else is there?''  It seems to me that computers offer us a chance to
 finally do better, in certain limited parts of life.  Take proofs.
@@ -409,6 +437,24 @@ set up tests to know whether they are using a value in the array or
 not.  And for proofs, I think proving equivalence to linear search for
 ``not found'' might be harder than just proving the right answer is
 provided, since it's \emph{not} actually equivalent to linear search!
+
+
+\vspace{0.1in}
+\framebox{\begin{minipage}{0.4 \textwidth}
+    
+{\bf COMMENTARY:} While linear search is a poor specification for binary search,
+differential testing is indeed a powerful tool, widely used in compiler, file
+system~\cite{ICSEDiff}, and container library testing, among other places.  Introduced
+into the literature by McKeeman's classic paper focused on
+compilers~\cite{Differential}, it has likely been independently
+discovered many times in the history of testing.
+
+Similarly, the ``just check 1'' approach discussed briefly relates to
+ideas of using informal ``small model properties'' and, more
+generally, bounded exhaustive testing~\cite{sullivan2004software},
+as well as other heuristics for effective bug-finding.
+\end{minipage}}
+\vspace{0.1in}
 
 \noindent{\bf PUPIL EPSILON:}  Ok, maybe Beta hasn't saved us much
 work here, where it's not quite equivalent and ``fixing'' the mismatch
@@ -482,9 +528,32 @@ might change, but right now it's true.  And the checkers don't seem
 that helpful here:  I bet when you change your program, the
 proof-checker just always says ``your proof no longer works.''
 
+
+\vspace{0.1in}
+\framebox{\begin{minipage}{0.4 \textwidth}
+{\bf COMMENTARY:}   A somewhat different (but still related) approach, less explicitly
+seen in the dialogue, is that presented in, e.g., Turner's
+\emph{Computational Artifacts}~\cite{turner2018computational}, where
+programs are seen as \emph{machines} with a human-intended
+\emph{purpose}.  It is interesting to consider that while \emph{metaphors}
+from this viewpoint are common (e.g., ``factory methods'') in the
+field, the literature of program correctness is much more attuned to
+programs as mathematical than as industrial artifacts (or, more
+generally, as teleological artifacts, like the wheel or the axe, of
+\emph{homo faber}).  This may be due to the Leibnizian dream of proofs
+and proof-checking; while engineers use scientific principles in
+design, no one really thinks that the model is the thing, or that a
+bridge can be ``proven'' rather than testing.  We wish it to be
+otherwise, with computer programs, so prefer not to think of them in
+this context as simply
+unfortunately over-complex, but strangely easy to copy, ``machines.''
+\end{minipage}}
+\vspace{0.1in}
+
 \noindent{\bf PUPIL EPSILON:}   In general, I think you're right. But
 there are some limited tools that are almost fully automatic I think.
-The Turing Award in 2007 was given\footnote{to Clarke, Emerson, and Sifakis}for a technique called model
+The Turing Award in 2007 was given\footnote{to Clarke, Emerson, and
+  Sifakis} for a technique called model
 checking, that is fairly limited in application, but really does, sort of,
 compute the proof automatically.  We talked about it in automata
 theory class.
@@ -527,6 +596,7 @@ changing the program, but if we're diligent engineers we obviously fix
 up our tests, that's what regression testing is, and nobody can argue
 that's some impractical thing that nobody in industry can use.
 
+
 \noindent{\bf PUPIL GAMMA:}  One little problem, again.   We don't
 have a bugginator.  How can you make a bugginator?
 
@@ -534,6 +604,20 @@ have a bugginator.  How can you make a bugginator?
 make a partial bugginator.  Inject \emph{some} bugs automatically.  I
 guess the lousy version would be to hire people to inject bugs.  Or
 maybe an LLM can come up with good bugs?
+
+\vspace{0.1in}
+\framebox{\begin{minipage}{0.4 \textwidth}
+{\bf COMMENTARY:}   The general issue of trust focusing on specifications, rather than
+programs, may well loom larger in the future, if LLM or other AI-based
+methods bring ``program synthesis'' (and, especially, potentially
+hallucinatory, and certainly stochastic, program synthesis) broadly
+conceived, into wider usage.  One promising point is that while LLMs
+can produce programs, which are inherently \emph{hard} to check, they can also produce
+tests~\cite{gpttestgen,siddiq2023empirica}, which as the dialogue
+suggests, may simplify the problem of trust.  Or, as Delta is about to
+imply, it may not...
+\end{minipage}}
+\vspace{0.1in}
 
 \noindent{\bf PUPIL DELTA:}  I don't know how you'd get a good sample,
 and I don't trust LLMs not to just make up the kinds of bugs engineers
@@ -566,6 +650,7 @@ of code could get you somewhere.
 \noindent{\bf PUPIL GAMMA:} Let's go over to my dorm room and write
 one of these.  I'd like to see how good my tests and my $\mathcal{S}$
 are for the operating systems project.
+
 
 \vspace{0.1in}
 
@@ -666,47 +751,7 @@ TEST(Run, Bentley) \{
 
 \section{Postscript}
 
-This dialogue is a tribute to, and reflection on, Imre Lakatos'
-classic book-length dialogue
- \emph{Proofs and Refutation}~\cite{lakatos1963proofs}.  It also
-owes a debt to MacKenzie's more recent sociological exploration of the
-same issues, \emph{Mechanizing
-  Proof: Computing, Risk, and Trust}~\cite{mackenzie2004mechanizing}.
-To some extent the approach to thinking about proofs, tests, and their
-meaning that (some of) the students arrive at is based on a Popperian~\cite{Popper} falsification methodology proposed in
-work by my colleagues and
-myself~\cite{groce2015verified,groce2018verified}.  All of these works
-concern efforts to \emph{refute} the completeness or correctness of an
-intellectual object, be it a mathematical definition, a mathematical
-proof, a computer program, or a specification of a computer program.
-The suggestive near-equivalences between the first two classes and the second two
-classes are instructive, as is the similarity of both to the process of
-scientific hypothesis and potentially falsifying experiment so central
-to Popper's work.
-Finally, the initial discussion owes a substantial debt to De Millo, Lipton, and
-Perlis' (in)famous ``Social processes and proofs of theorems and
-programs''~\cite{de1979social}.
-
-A somewhat different (but still related) approach, less explicitly
-presented in the dialogue, is that presented in, e.g., Turner's
-\emph{Computational Artifacts}~\cite{turner2018computational}, where
-programs are seen as \emph{machines} with a human-intended
-\emph{purpose}.  It is interesting to consider that while metaphors
-from this viewpoint are common (e.g., ``factory methods'') in the
-field, the literature of program correctness is much more atuned to
-programs as mathematical than as industrial artifacts (or, more
-generally, as teleological products, like the wheel or the axe, of \emph{homo faber}).
-
-The general issue of trust focusing on specifications, rather than
-programs, may well loom larger in the future, if LLM or other AI-based
-methods bring ``program synthesis'' (and, especially, potentially
-hallucinatory and certainly stochastic, program synthesis) broadly
-conceived, into wider usage.  One promising point is that while LLMs
-can produce programs, which are hard to check, they can also produce
-tests~\cite{gpttestgen,siddiq2023empirica}, which as the dialogue
-suggests, may simplify the problem of trust.
-
-Finally, the author was surprised to learn that Petricek, in 2017,
+The author was surprised to learn that Petricek, in 2017,
 produced a very interesting dialogue, also featuring pupils Beta, Alpha, and so forth, in
 similar homage to Lakatos, and covering some of the same topics as
 this essay~\cite{DBLP:journals/programming/000117}!  Reading both
@@ -715,7 +760,7 @@ to the same starting point, and the same unusual approach to similar
 topics, and, for that matter, a probably substantial agreement by the
 authors on certain core issues.
 
-\subsection{Dijkstra's Objection}
+\section{Dijkstra's Objection}
 
 To speak of these topics, in this way is, possibly, to infuriate the
 ghost of Edsger Dijkstra.  In a 1977 position paper~\cite{dijkstra1977position}, Dijkstra argued
@@ -750,18 +795,21 @@ techniques are very likely \emph{limited} in effectiveness, but it is not outsid
 scope of (computer) science, because it is possible to automate some of the
 process of refutation and produce meaningful \emph{quantitative} measures of how much
 $\mathcal{S}$ ``leaves out'' in terms of behaviors not prohibited.
-The bugginator is reality.
+The bugginator is realizable.
 
 
 I add that in a sense my personal sympathies do lie with
-Dijkstra.  My own research interests have focused on non-social methods
+Dijkstra.  My own research interests have focused on \emph{non-social} methods
 for finding faults in software systems, those involving the execution
 of complex computer programs, not the modification of development
 processes, other than in the sense of incorporating the use of such tools.
 The simple fact is, however, that such tools can help identify cases
 where the specification itself should be questioned, and offer
 opportunities to refine and revise $\mathcal{S}$ that do not arise
-from a social process, but from a computation.
+from a social process, but from an interpretation of a computation.
+And surely Dijkstra cannot object to \emph{some} limited amount of
+interpretation of computations, without which no specification can be
+seen as meaningful or checkable.
 
 Furthermore, while Dijkstra might object to ``bugginator'' uses that
 rely on testing, of which Dijkstra was notoriously skeptical, it is
@@ -777,8 +825,8 @@ specification, not their absence.  In that, he is correct.
 
 The specific version of binary search that starts things rolling comes from Joshua Bloch's blog post~\cite{bloch} reporting
 the bug the Alpha brilliantly detects.  It thus comes, fundamentally, from Jon Bentley's original version ``proven
-correct'' in \emph{Programming Pearls}~\cite{Pearls}; proving binary
-search has a long pedigree in the literature, e.g., back to
+correct'' in \emph{Programming Pearls}~\cite{Pearls}. Proving binary
+search correct, of course, has a long pedigree in the literature, e.g., back to
 Hoare~\cite{hoare1971proof}.  Bloch's version  has
 been changed from Java to C code.  The programs in question, and instructions
 for proving and testing (and mutating~\cite{MutationSurvey}) them using CBMC~\cite{CBMCp} and
@@ -786,17 +834,6 @@ DeepState~\cite{goodman2018deepstate} (and UniversalMutator~\cite{SyntaxUM}), re
 \url{https://github.com/agroce/onward24code}.  Some brief notes on the
 connections between this code and the imaginary classroom discussion follow.
 
-While linear search is a poor specification for binary search,
-differential testing is indeed a powerful tool, widely used in compiler, file
-system~\cite{ICSEDiff}, and container library testing, among other places.  Introduced
-into the literature by McKeeman's classic paper focused on
-compilers~\cite{Differential}, it has likely been independently
-discovered many times in the history of testing.
-
-Similarly, the ``just check 1'' approach discussed briefly relates to
-ideas of using informal ``small model properties'' and, more
-generally, bounded exhaustive testing~\cite{sullivan2004software},
-as well as other heuristics for effective bug-finding.
 
 \subsection{CBMC}
 
@@ -856,7 +893,9 @@ in C and a number of other languages, using a more sophisticated
 version of the approach proposed by Gamma~\cite{SyntaxUM}.  UniversalMutator, like other
 mutation tools, acts as a very limited version of Epsilon's
 hypothetical 
-``bugginator.''  The imaginator remains up to us.
+``bugginator.''
+
+The imaginator remains up to us.
 
 
 \bibliographystyle{plain}
