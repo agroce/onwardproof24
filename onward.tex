@@ -353,7 +353,7 @@ owes a debt to MacKenzie's more recent sociological exploration of the
 same issues, \emph{Mechanizing
   Proof: Computing, Risk, and Trust}~\cite{mackenzie2004mechanizing}.
 To some extent the approach to thinking about proofs, tests, and their
-meaning that (some of) the students arrive at is based on a Popperian~\cite{Popper} falsification methodology proposed in
+meaning that (some of) the students arrive at is based on a Popperian~\cite{Popper,popperconjectures} falsification methodology proposed in
 work by my colleagues and
 myself~\cite{groce2015verified,groce2018verified}.  All of these works
 concern efforts to \emph{refute} the completeness or correctness of an
@@ -439,23 +439,6 @@ not.  And for proofs, I think proving equivalence to linear search for
 provided, since it's \emph{not} actually equivalent to linear search!
 
 
-\vspace{0.1in}
-\framebox{\begin{minipage}{0.4 \textwidth}
-    
-{\bf COMMENTARY:} While linear search is a poor specification for binary search,
-differential testing is indeed a powerful tool, widely used in compiler, file
-system~\cite{ICSEDiff}, and container library testing, among other places.  Introduced
-into the literature by McKeeman's classic paper focused on
-compilers~\cite{Differential}, it has likely been independently
-discovered many times in the history of testing.
-
-Similarly, the ``just check 1'' approach discussed briefly relates to
-ideas of using informal ``small model properties'' and, more
-generally, bounded exhaustive testing~\cite{sullivan2004software},
-as well as other heuristics for effective bug-finding.
-\end{minipage}}
-\vspace{0.1in}
-
 \noindent{\bf PUPIL EPSILON:}  Ok, maybe Beta hasn't saved us much
 work here, where it's not quite equivalent and ``fixing'' the mismatch
 doesn't seem much easier than just figuring out exactly what binary
@@ -469,6 +452,36 @@ code.  I don't know about proofs, but for testing at least, comparing
 complex versions that have to be fast and practical for real-world use
 to much simpler implementations that you couldn't use in real life...
 That seems like a very nice way to test some things.
+
+
+\vspace{0.1in}
+\framebox{\begin{minipage}{0.4 \textwidth}
+    
+{\bf COMMENTARY:} While linear search is a poor specification for binary search,
+differential testing is indeed, as the students speculate, a powerful tool, widely used in compiler, file
+system~\cite{ICSEDiff}, and container library testing, among other places.  Introduced
+into the literature by McKeeman's classic paper focused on
+compilers~\cite{Differential}, it has likely been independently
+discovered many times in the history of testing.  Differential testing
+is one of the most useful ``tricks'' for working around the
+\emph{oracle problem}~\cite{oracleMcMinn,staats2011programs}.  The
+oracle problem, though the students do not mention it by name, is
+a fundamental aspect of their concerns: how can a specification be
+``embodied'' as checks that will fail during a test.  Translating a
+mental model of what a program should do into computable conditions on
+executions is
+a key part of the work of refuting programs.
+
+Similarly, the ``just check 1'' approach discussed briefly relates to
+ideas of using informal ``small model properties'' and, more
+generally, bounded exhaustive testing~\cite{sullivan2004software},
+as well as other heuristics for effective bug-finding.
+
+The idea of having a computer check proofs dates, in a certain sense,
+to Leibniz (again), but at least to the frequently reprinted 1962 proposal of McCarthy~\cite{McCarthy1962TowardsAM,mccarthy1993towards}.
+\end{minipage}}
+\vspace{0.1in}
+
 
 \noindent{\bf PUPIL DELTA:}  Yes, yes, that sounds practical.  But it
 doesn't really address the underlying problem at all.  It's a cheap
