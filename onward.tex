@@ -124,7 +124,7 @@
 \ccsdesc[500]{Software and its engineering~Dynamic analysis}
 \ccsdesc[500]{Software and its engineering~Software testing and debugging}
 
-\keywords{software testing software verificaton, proof, counterexample, tests}
+\keywords{software testing software verification, proof, counterexample, tests}
 
 
 
@@ -245,7 +245,7 @@ searching for and the element is not the one you're searching for!
 \noindent{\bf PUPIL DELTA:}  Anyway, I think the real problem isn't
 how to test binary search.  I mean, that's fine, and I'm sure there
 could even be computer scientists who just think about silly trivial
-thngs like how to write better tests that find more bugs.  But don't
+things like how to write better tests that find more bugs.  But don't
 you think there's something deeper going on here, something that's a
 \emph{real} problem?
 
@@ -383,7 +383,7 @@ computers, nobody also had the patience or attention to detail to
 produce perfect logarithm tables.  Babbage's dream in part was to
 replace legions of inattentive country clergy computing logarithms
 poorly with a machine pumping them out perfectly.  To an extent he
-woudln't have though possible, we have that now, and not just for
+wouldn't have though possible, we have that now, and not just for
 arithmetic problems, but with symbolic math tools.  There are people
 who work on automated theorem provers, and while those aren't
 replacing mathematicians or checking proofs like Fermat's last theorem
@@ -492,7 +492,7 @@ person's head.  Or, really, like we said, to fit inside multiple heads
 at once so a group of reliable people can all agree that they are all
 thinking of the same thing, and that thing is the right thing.  You're
 just pushing the problem back one step, in a small set of cases, and
-the same issue really comes up for the simple verison, if the problem
+the same issue really comes up for the simple version, if the problem
 at hand is at all complicated, like your examples.
 
 \noindent{\bf PUPIL EPSILON:}   It's still a partial solution, like I
@@ -618,6 +618,15 @@ make a partial bugginator.  Inject \emph{some} bugs automatically.  I
 guess the lousy version would be to hire people to inject bugs.  Or
 maybe an LLM can come up with good bugs?
 
+
+\noindent{\bf PUPIL DELTA:}  I don't know how you'd get a good sample,
+and I don't trust LLMs not to just make up the kinds of bugs engineers
+already think about.  You'd want something principled, that comes up
+with bug scenarios nobody normal will ever think of, the way the
+fuzzers we saw in the software security class
+come up with program inputs nobody considers.
+
+
 \vspace{0.1in}
 \framebox{\begin{minipage}{0.4 \textwidth}
 {\bf COMMENTARY:}   The general issue of trust focusing on specifications, rather than
@@ -627,17 +636,9 @@ hallucinatory, and certainly stochastic, program synthesis) broadly
 conceived, into wider usage.  One promising point is that while LLMs
 can produce programs, which are inherently \emph{hard} to check, they can also produce
 tests~\cite{gpttestgen,siddiq2023empirical}, which as the dialogue
-suggests, may simplify the problem of trust.  Or, as Delta is about to
-imply, it may not...
+suggests, may simplify the problem of trust.  Or, as Delta has implied, it may not...
 \end{minipage}}
 \vspace{0.1in}
-
-\noindent{\bf PUPIL DELTA:}  I don't know how you'd get a good sample,
-and I don't trust LLMs not to just make up the kinds of bugs engineers
-already think about.  You'd want something principled, that comes up
-with bug scenarios nobody normal will ever think of, the way the
-fuzzers we saw in the software security class
-come up with program inputs nobody considers.
 
 \noindent{\bf PUPIL EPSILON:}  That's it!  Those fuzzers like AFL are
 called mutation-based fuzzers because their basic loop is taking some
@@ -725,7 +726,7 @@ argument, but it argues
 too little.
 
 That's because Dijkstra was simply wrong, I think, that there is no scientific or
-mathematical way to approach the problem of the general suitabiltiy of
+mathematical way to approach the problem of the general suitability of
 $\mathcal{S}$. it is certainly a hard problem, and one where purely mathematical
 techniques are very likely \emph{limited} in effectiveness, but it is not outside the
 scope of (computer) science, because it is possible to automate some of the
